@@ -16,7 +16,7 @@ function scene:create(event)
 
 	score = display.newText("0", display.contentWidth * 0.5, display.contentHeight * 0.5, native.systemFontBold, 40)
     
-    player = display.newImage("unicorn.png")
+    player = display.newImage("imgres.jpg")
     player.x = display.contentWidth * 0.5
     player.y = display.contentHeight * 0.5
     physics.addBody(player, "static", {density=.08,  bounce=0.1, friction=0.2})
@@ -34,6 +34,17 @@ function scene:create(event)
     ceiling.y = 0
     physics.addBody(ceiling, "static", {density=.08,  bounce=0.1, friction=0.2})
     screenGroup:insert(ceiling)
+    
+    images (1) = display.newImage("images (1).jpeg")
+    images (1)sandwich.x = display.contentWidth * 2
+    images (1).y = display.contentHeight * 0.5
+    images (1).speed = 5
+    images (1)sandwich.angle = math.random(1, 360)
+    images (1).amp = math.random(20, 100)
+    images (1).initY = sandwich.y
+    physics.addBody(images (1), "static", {density=0, bounce=0.1, friction=.2})
+    screenGroup:insert(images (1))
+
     
 end
 
@@ -83,6 +94,10 @@ function scene:show(event)
 	elseif (event.phase == "did") then
 		Runtime:addEventListener("touch", touchScreen)
         Runtime:addEventListener("collision", onCollision)
+      
+        
+        Runtime:addEventListener("enterFrame", images (1))
+
 	end
 end
 
@@ -90,7 +105,7 @@ function scene:hide(event)
 	if (event.phase == "will") then
         Runtime:removeEventListener("touch", touchScreen)
         Runtime:removeEventListener("collision", onCollision)
-
+    
 	elseif (event.phase == "did") then
 
 	end
